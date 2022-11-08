@@ -9,9 +9,9 @@ function App() {
   return (
     <>
       {!user
-        ? <Login setUser={setUser} />
+        ? <><Login setUser={setUser} /> <Signup setUser={setUser}></Signup></>
         : <Protected />
-
+        
       }
     </>
   );
