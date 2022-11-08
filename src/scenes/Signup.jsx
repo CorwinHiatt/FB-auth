@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { initializeApp } from "firebase/app"
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, 
-    signInWithPopup } from "firebase/auth"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 const firebaseConfig = {
     apiKey: "AIzaSyDjclId9AjJ1EUKC8T0Evpg_-a29UjRLt0",
@@ -12,10 +11,10 @@ const firebaseConfig = {
     appId: "1:437335609197:web:27ca8f6ece801f1e6e5464"
 };
 
-export default function Login({setUser}) {
+export default function  Signup({setUser}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const handleLogin = async (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault()
         const app = initializeApp(firebaseConfig) //this connects to firebase 
         const auth = getAuth(app) // connects us to firebase auth
@@ -23,21 +22,12 @@ export default function Login({setUser}) {
             .catch(alert)
        setUser(response.user)
     }
-    const handleGoogleLogin = async () => {
-        const app = initializeApp(firebaseConfig) //this connects to firebase 
-        const auth = getAuth(app) // connects us to firebase auth
-        const provider = new GoogleAuthProvider()
-        const response = await signInWithPopup(auth, provider)
-        .catch(alert)
-        setUser(response.user)
-    }
-
     return (
         <>
 
-            <h1>LOGIN</h1>
+            <h1> Signup</h1>
 
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSignup}>
                 <label htmlFor="email">Email:{''}
                     <input type='email' name='email'
                         value={email} onChange={e => setEmail(e.target.value)}
@@ -48,10 +38,8 @@ export default function Login({setUser}) {
                         value={password} onChange={e => setPassword(e.target.value)}
                         placeholder="*****" />
                 </label><br />
-                <button type="submit">Login</button>
+                <button type="submit"> Signup</button>
             </form>
-            <br />
-            <button onClick={handleGoogleLogin}>Sign up with Google</button>
         </>
     )
 }
